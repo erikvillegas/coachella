@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('zoom-container');
   const panzoomArea = document.getElementById('panzoom-area');
   const img = document.getElementById('schedule-img');
   const timeLine = document.getElementById('time-line');
@@ -18,11 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   panzoomArea.addEventListener('wheel', panzoom.zoomWithWheel);
   panzoomArea.addEventListener('panzoomchange', updateTimeLine);
 
-  // When the image loads, size the container and draw the line
-  img.addEventListener('load', () => {
+  // When the image loads (or if already loaded), size the container and draw the line
+  if (img.complete) {
     panzoomArea.style.height = img.naturalHeight + 'px';
     updateTimeLine();
-  });
+  } else {
+    img.addEventListener('load', () => {
+      panzoomArea.style.height = img.naturalHeight + 'px';
+      updateTimeLine();
+    });
+  }
 
   // Redraw the line every minute
   setInterval(updateTimeLine, 60000);
@@ -44,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Based on intrinsic image dimensions
+    // Based on intrinsic image dimensions (make sure these match your image)
     const totalImageHeight = 3884;
     const topWhitespace = 626;
     const bottomWhitespace = 402;

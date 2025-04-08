@@ -12,6 +12,7 @@
     <script src="./panzoom.js"></script>
     <title>Schedule Viewer</title>
     <style>
+      /* CSS stays the same */
       #zoom-container {
         width: 100%;
         height: 100%;
@@ -19,18 +20,15 @@
         position: relative;
         background: black;
       }
-
       #panzoom-area {
         position: relative;
         transform-origin: 0 0;
       }
-
       #schedule-img {
         display: block;
         width: 100%;
         height: auto;
       }
-
       #time-line {
         position: absolute;
         left: 200px;
@@ -43,14 +41,12 @@
     </style>
   </head>
   <body>
-    <body>
-      <div id="zoom-container">
-        <div id="panzoom-area">
-          <img id="schedule-img" src="FRIDAY.png" alt="Schedule" />
-          <div id="time-line"></div>
-        </div>
+    <div id="zoom-container">
+      <div id="panzoom-area">
+        <img id="schedule-img" src="FRIDAY.png" alt="Schedule" />
+        <div id="time-line"></div>
       </div>
-    </body>
+    </div>
 
     <script src="script.js"></script>
     <script>
