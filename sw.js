@@ -3,6 +3,7 @@ const OFFLINE_FILES = [
   '/',
   '/index.html',
   '/script.js',
+  '/panzoom.js',
   '/FRIDAY.png',
   '/manifest.json',
   '/icon.png',
