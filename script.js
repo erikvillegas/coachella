@@ -1,11 +1,11 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('zoom-container');
+  const panzoomArea = document.getElementById('panzoom-area');
   const img = document.getElementById('schedule-img');
   const timeLine = document.getElementById('time-line');
 
-  // Initialize Panzoom
-  const panzoom = Panzoom(container, {
+  // Initialize Panzoom on the area that holds image + red line
+  const panzoom = Panzoom(panzoomArea, {
     maxScale: 5,
     minScale: 1,
     contain: 'outside',
@@ -14,24 +14,21 @@ document.addEventListener('DOMContentLoaded', () => {
     touchAction: 'none'
   });
 
-  // Allow scroll/zoom on mobile
-  container.addEventListener('wheel', panzoom.zoomWithWheel);
+  // Allow pinch-to-zoom and scroll
+  panzoomArea.addEventListener('wheel', panzoom.zoomWithWheel);
+  panzoomArea.addEventListener('panzoomchange', updateTimeLine);
 
-  // Update red line position on zoom/pan
-  container.addEventListener('panzoomchange', updateTimeLine);
-
-  // Wait for image to load and then set up
+  // When the image loads, size the container and draw the line
   img.addEventListener('load', () => {
-    // Set container height to match the image's native height
-    container.style.height = img.naturalHeight + 'px';
+    panzoomArea.style.height = img.naturalHeight + 'px';
     updateTimeLine();
   });
 
-  // Redraw line every minute
+  // Redraw the line every minute
   setInterval(updateTimeLine, 60000);
 
   function updateTimeLine() {
-    // Simulate 1 PM
+    // Simulate 1 PM for testing
     const now = new Date();
     now.setHours(13);
     now.setMinutes(0);
@@ -47,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Image intrinsic dimensions
+    // Based on intrinsic image dimensions
     const totalImageHeight = 3884;
     const topWhitespace = 626;
     const bottomWhitespace = 402;
@@ -56,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const percentThrough = (hours - startHour) / (endHour - startHour);
     const imageY = topWhitespace + usableImageHeight * (1 - percentThrough);
 
-    // Position the red line in image coordinates
     timeLine.style.top = `${imageY}px`;
     timeLine.style.display = 'block';
   }

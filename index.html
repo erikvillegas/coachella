@@ -12,29 +12,23 @@
     <script src="./panzoom.js"></script>
     <title>Schedule Viewer</title>
     <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: auto;
-        background-color: black;
-        touch-action: pan-x pan-y; /* ✅ allow one-finger scroll */
-      }
-
       #zoom-container {
         width: 100%;
-        height: auto;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+        background: black;
+      }
+
+      #panzoom-area {
         position: relative;
         transform-origin: 0 0;
       }
 
       #schedule-img {
+        display: block;
         width: 100%;
         height: auto;
-        max-width: none;
-        max-height: none;
-        display: block;
       }
 
       #time-line {
@@ -49,10 +43,14 @@
     </style>
   </head>
   <body>
-    <div id="zoom-container">
-      <img id="schedule-img" src="FRIDAY.png" alt="Schedule" />
-      <div id="time-line"></div>
-    </div>
+    <body>
+      <div id="zoom-container">
+        <div id="panzoom-area">
+          <img id="schedule-img" src="FRIDAY.png" alt="Schedule" />
+          <div id="time-line"></div>
+        </div>
+      </div>
+    </body>
 
     <script src="script.js"></script>
     <script>
