@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes" />
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes" />
+  <link rel="icon" href="icon.png" sizes="192x192">
   <title>Schedule Viewer</title>
   <style>
     * {
@@ -50,9 +51,9 @@
   <script src="script.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service worker registered!', reg))
-        .catch(err => console.error('Service worker registration failed:', err));
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('✅ Service worker registered', reg))
+        .catch(err => console.error('❌ Service worker failed:', err));
     }
   </script>
 </body>
