@@ -5,11 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init panzoom
   const panzoom = Panzoom(container, {
-    contain: 'outside',
     maxScale: 5,
-    minScale: 1
+    minScale: 1,
+    contain: 'outside',
+    startScale: 1, // ✅ initial zoom level
+    panOnlyWhenZoomed: false, // ✅ allow panning even at default zoom
+    touchAction: 'none' // Panzoom manages this
   });
-  container.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
+  // container.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
 
   // Position the line when image loads or zoom/pan happens
   function updateTimeLine() {
